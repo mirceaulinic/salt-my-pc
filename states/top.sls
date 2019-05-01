@@ -1,0 +1,4 @@
+base:
+  '*':
+    - files
+    - pkgs
