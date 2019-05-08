@@ -39,13 +39,6 @@ Usage
          base:
            - </path/to/salt-my-pc/repo>/pillar
 
-3. Restart the Salt Minion service to load the changes in the configuration
-   file, e.g., using systemd or your preferred service manager software:
-
-   .. code-block:: bash
-
-       $ systemctl restart salt-minion
-
 3. Enjoy
 
    .. code-block:: bash
