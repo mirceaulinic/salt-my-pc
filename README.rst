@@ -8,34 +8,64 @@ Usage
 
 1. Install the Salt Minion
 
-.. code-block:: bash
+   .. code-block:: bash
 
-    apt-get install salt-minion
+       $ apt-get install salt-minion
 
+   .. note::
 
-2. Edit /etc/salt/minion
+       On some system distributions this may install older versions of Salt. It 
+       sometimes might be a better idea to install the Salt Minion using 
+       `salt-bootstrap <https://github.com/saltstack/salt-bootstrap>`__, e.g.,
 
-.. code-block:: yaml
+       .. code-block:: bash
 
-    file_client: local
+         $ curl -o bootstrap-salt.sh -L https://bootstrap.saltstack.com
+         ~~ check the contents of bootstrap-salt.sh ~~
+         $ sudo sh bootstrap-salt.sh
 
-    file_roots:
-      base:
-        - </path/to/salt-my-pc/repo>
-        - </path/to/salt-my-pc/repo>/states
+2. Edit the Salt Minion configuration file: ``/etc/salt/minion``
 
-    pillar_roots:
-      base:
-        - </path/to/salt-my-pc/repo>/pillar
+   .. code-block:: yaml
 
-3. Restart the Salt Minion service, e.g.,
+       file_client: local
 
-.. code-block:: bash
+       file_roots:
+         base:
+           - </path/to/salt-my-pc/repo>
+           - </path/to/salt-my-pc/repo>/states
 
-    systemctl restart salt-minion
+       pillar_roots:
+         base:
+           - </path/to/salt-my-pc/repo>/pillar
+
+3. Restart the Salt Minion service to load the changes in the configuration
+   file, e.g., using systemd or your preferred service manager software:
+
+   .. code-block:: bash
+
+       $ systemctl restart salt-minion
 
 3. Enjoy
 
-.. code-block:: bash
+   .. code-block:: bash
 
-    salt-call state.highstate
+       $ sudo salt-call state.highstate
+
+   .. note::
+
+      To avoid running with sudo, simply change the owner of the directories
+      ``/var/log/salt/`` and ``/var/cache/salt/``, e.g,
+
+      .. code-block:: bash
+
+        $ sudo chown -R /var/log/salt/
+        $ sudo chown -R /var/cache/salt/
+        $ salt-call test.ping
+
+      Alternatively, you can run the ``misc`` State:
+
+      .. code-block:: bash
+
+        $ sudo salt-call state.apply perms
+        $ salt-call test.ping

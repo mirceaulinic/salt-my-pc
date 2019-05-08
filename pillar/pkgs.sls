@@ -5,6 +5,7 @@ pkgs:
   - docker-compose
   - firefox
   - gcc
+  - git
   - google-chrome-stable  # unfortunately needed, as some websites don't work well in Firefox :-(
   - jq
   - make
@@ -18,4 +19,5 @@ pkgs:
   - snapd
   - vim
   - wget
+  - xutils-dev
   - zsh

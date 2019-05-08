@@ -1,4 +1,5 @@
 base:
   '*':
-    - files
     - pkgs
+    - git
+    - files
