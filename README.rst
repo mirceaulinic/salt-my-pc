@@ -3,6 +3,12 @@ Salt my PC
 
 Manage my computer using Salt.
 
+The idea is to keep everything simple and portable across computers, to 
+replicate my development environment the way I like it, while not having 
+additional dependencies or always running processes etc. The Masterless Salt 
+Minion facilitates this setup, and whenever I need I can execute a Salt function 
+or State using ``salt-call``.
+
 Usage
 -----
 
@@ -39,6 +45,10 @@ Usage
          base:
            - </path/to/salt-my-pc/repo>/pillar
 
+
+   It is important to configure the fileserver to use the local client, so you
+   don't need a Salt Master (i.e., you'll be running a Masterless Minion).
+
 3. Enjoy
 
    .. code-block:: bash
@@ -52,8 +62,8 @@ Usage
 
       .. code-block:: bash
 
-        $ sudo chown -R /var/log/salt/
-        $ sudo chown -R /var/cache/salt/
+        $ sudo chown -R $USER /var/log/salt/
+        $ sudo chown -R $USER /var/cache/salt/
         $ salt-call test.ping
 
       Alternatively, you can run the ``misc`` State:
@@ -61,4 +71,15 @@ Usage
       .. code-block:: bash
 
         $ sudo salt-call state.apply perms
+        $ salt-call test.ping
+
+   .. hint::
+
+      Generally, Salt is going to install and enable the system service for the
+      Minion, but you don't necessarily need to have the Minion always running
+      -- you can for example disable the service, e.g.,
+
+      .. code-block:: bash
+
+        $ sudo systemctl disable salt-minion
         $ salt-call test.ping
