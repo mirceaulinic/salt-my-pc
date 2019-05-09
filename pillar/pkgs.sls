@@ -1,0 +1,23 @@
+pkgs:
+  - ack
+  - curl
+  - docker-ce
+  - docker-compose
+  - firefox
+  - gcc
+  - git
+  - google-chrome-stable  # unfortunately needed, as some websites don't work well in Firefox :-(
+  - jq
+  - make
+  - python3
+  - python3.6-dev
+  - python3-virtualenv
+  - rake
+  - rsyslog
+  - ruby
+  - ruby-dev
+  - snapd
+  - vim
+  - wget
+  - xutils-dev
+  - zsh
